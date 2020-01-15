@@ -9,21 +9,23 @@ import { colors } from '../constants/Constants';
 class ProfileScreen extends Component {
     state = { image: undefined };
 
-    componentDidMount() {
-        this.getPermissionsAsync();
-    }
-
     getPermissionsAsync = async () => {
         if (Constants.platform.ios) {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            const { status } = await Permissions.askAsync(Permissions.CAMERA);
             if (status !== 'granted') {
-                alert('Camera roll permissions are required to upload a photo!');
+                throw new Error('Camera permissions are required to upload a photo!');
             }
         }
     };
 
     handleProfilePicPress = async () => {
-        const result = await ImagePicker.launchImageLibraryAsync({
+        try {
+            this.getPermissionsAsync();
+        } catch (e) {
+            alert(e);
+            return;
+        }
+        const result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [1, 1],
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
         color: 'white',
         flexDirection: 'column-reverse',
         justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
         color: 'white',
