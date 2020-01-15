@@ -58,8 +58,12 @@ class HomeScreen extends Component {
         }
         return (
             <View style={[styles.container, {backgroundColor: this.state.backgroundColor}]}>
-                <Text style={styles.titleText}> The REAL Catbook </Text>
-                {img}
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}> The REAL Catbook </Text>
+                </View>
+                <View style={styles.imageContainer}>
+                    {img}
+                </View>
             </View>
         );
     }
@@ -69,22 +73,27 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         color: 'white',
-        justifyContent: 'space-around',
         alignItems: 'center',
+    },
+    titleContainer: {
+        justifyContent: 'flex-end',
+        flex: 1,
+    },
+    imageContainer: {
+        flex: 4,
     },
     titleText: {
         flex: 1,
-        paddingTop: 300
-    },
-    text: {
+        paddingTop: 100,
         color: 'white',
-        textAlign: 'center'
+        fontSize: 30,
+        fontFamily: 'notoserif',
     },
     imageStyle: {
-        flex: 2,
-        height: 300,
+        flex: 1,
+        height: undefined,
         width: 300,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
     }
 });
 
