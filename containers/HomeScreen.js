@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 class HomeScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { image: undefined };
+        this.state = { image: undefined, backgroundColor: 'purple' };
     }
+
+    onSwipeLeft = () => {
+        this.setState({
+            backgroundColor: 'green',
+        }, this.makeCatImageRequest);
+        this.makeCatImageRequest();
+    };
+
+    onSwipeRight = () => {
+        this.setState({
+            backgroundColor: 'red',
+        }, this.makeCatImageRequest);
+    };
 
     makeCatImageRequest = () => {
         return fetch('https://api.thecatapi.com/v1/images/search', {
@@ -16,13 +30,10 @@ class HomeScreen extends Component {
         })
         .then(response => response.json())
         .then(responseJson => {
-            console.log(responseJson[0].url);
-            this.setState(
-            {
+            // console.log(responseJson[0].url);
+            this.setState({
                 image: responseJson[0].url,
-            },
-            function() {}
-            );
+            }, null);
         })
         .catch(error => {
             console.error(error);
@@ -36,11 +47,17 @@ class HomeScreen extends Component {
     render() {
         let img;
         if (this.state.image != undefined) {
-            console.log(this.state.image);
-            img = <Image style={styles.imageStyle} source={{uri: this.state.image}} />;
+            // console.log(this.state.image);
+            img = 
+                <GestureRecognizer
+                    onSwipeLeft={this.onSwipeLeft}
+                    onSwipeRight={this.onSwipeRight}
+                >
+                    <Image style={styles.imageStyle} source={{uri: this.state.image}} />
+                </GestureRecognizer>;
         }
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor: this.state.backgroundColor}]}>
                 <Text style={styles.titleText}> The REAL Catbook </Text>
                 {img}
             </View>
@@ -51,13 +68,13 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'purple',
         color: 'white',
         justifyContent: 'space-around',
         alignItems: 'center',
     },
     titleText: {
         flex: 1,
+        paddingTop: 300
     },
     text: {
         color: 'white',
