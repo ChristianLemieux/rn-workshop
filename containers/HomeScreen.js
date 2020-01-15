@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import { layout } from '../constants/Constants';
 
 class HomeScreen extends Component {
 
@@ -71,22 +72,23 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        color: 'white',
         alignItems: 'center',
+        height: layout.height,
+        width: layout.width,
+        flex: 1,
     },
     titleContainer: {
-        justifyContent: 'flex-end',
         flex: 1,
+        justifyContent: 'flex-end',
     },
     imageContainer: {
-        flex: 4,
+        flex: 2,
+        justifyContent: 'flex-start',
     },
     titleText: {
-        flex: 1,
-        paddingTop: 100,
         color: 'white',
         fontSize: 30,
+        fontWeight: 'bold',
     },
     imageStyle: {
         flex: 1,
