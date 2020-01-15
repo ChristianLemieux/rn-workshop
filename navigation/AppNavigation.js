@@ -18,11 +18,7 @@ const TabNavigator = createBottomTabNavigator(
                 tabBarIcon: ({ focused }) => 
                     <TabBarIcon
                         focused={focused}
-                        name={
-                        Platform.OS === 'ios'
-                            ? `ios-information-circle${focused ? '' : '-outline'}`
-                            : 'md-information-circle'
-                        }
+                        name={`info${focused ? '' : '-outline'}`}
                     />,
             }),
         },
@@ -33,11 +29,7 @@ const TabNavigator = createBottomTabNavigator(
                 tabBarIcon: ({ focused }) => 
                     <TabBarIcon
                         focused={focused}
-                        name={
-                        Platform.OS === 'ios'
-                            ? `ios-person${focused ? '' : '-outline'}`
-                            : 'md-person'
-                        }
+                        name={`person${focused ? '' : '-outline'}`}
                     />,
             }),
         },
