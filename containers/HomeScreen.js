@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
         paddingTop: 100,
         color: 'white',
         fontSize: 30,
-        fontFamily: 'notoserif',
     },
     imageStyle: {
         flex: 1,
