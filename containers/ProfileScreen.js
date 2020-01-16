@@ -11,9 +11,9 @@ class ProfileScreen extends Component {
 
     getPermissionsAsync = async () => {
         if (Constants.platform.ios) {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA);
+            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
             if (status !== 'granted') {
-                throw new Error('Camera permissions are required to upload a photo!');
+                throw new Error('Camera roll permissions are required to upload a photo!');
             }
         }
     };
@@ -25,7 +25,7 @@ class ProfileScreen extends Component {
             alert(e);
             return;
         }
-        const result = await ImagePicker.launchCameraAsync({
+        const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [1, 1],
