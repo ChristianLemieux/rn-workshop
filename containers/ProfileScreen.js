@@ -32,8 +32,6 @@ class ProfileScreen extends Component {
             quality: 1,
         });
 
-        // console.log(result);
-
         if (!result.cancelled) {
             this.setState({ image: result.uri });
         }

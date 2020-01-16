@@ -31,7 +31,6 @@ class HomeScreen extends Component {
         })
         .then(response => response.json())
         .then(responseJson => {
-            // console.log(responseJson[0].url);
             this.setState({
                 image: responseJson[0].url,
             }, null);
@@ -48,7 +47,6 @@ class HomeScreen extends Component {
     render() {
         let img;
         if (this.state.image != undefined) {
-            // console.log(this.state.image);
             img = 
                 <GestureRecognizer
                     onSwipeLeft={this.onSwipeLeft}
